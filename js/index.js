@@ -16,7 +16,7 @@
   data = [
     "Olá!",
     "Eu sou Nilsonlinux",
-    "Funciońário do Mateus Supermercados",
+    "Funcionário do Mateus Supermercados",
     "Na área de sistemas",
     "Usuário de Linux desde 2006",
     "Estudante de Jekyll",
