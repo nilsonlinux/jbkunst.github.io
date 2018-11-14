@@ -1,18 +1,18 @@
-title: Jkunst
-tagline: R, Data & Code
+title: Nilsonlinux
+tagline: Web developer
 
 author:
-  name: Joshua Kunst
-  email: jbkunst@gmail.com
-  twitter: jbkunst
-  github: jbkunst
+  name: Nilsonlinux
+  email: nilsonlinux@gmail.com
+  twitter: Nilsonlinux
+  github: Nilsonlinux
   
 include: ['_pages']
   
 layout: post
 permalink: /:categories/:title/
 
-url: http://jkunst.com
+url: http://nilsonlinux.github.io
 
 markdown: kramdown
 markdown_ext:  markdown,mkdown,mkdn,mkd,md
