@@ -23,7 +23,7 @@
     "HTML, PHP...",
     "Apreciador de Markdown",
     "Software",
-    "Interface.",
+    "Interface e outras artes de tecnologia.",
     "Obrigado por visitar",
     "Agradeço... ;)!",
     ""
