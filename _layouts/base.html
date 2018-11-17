@@ -16,7 +16,7 @@
   {% endif %} 
   <title>&middot; Nilsonlinux &middot; {{ page.title }}</title>
   <link rel="shortcut icon" href="/images/favicon/{{ page.favicon }}" type="image/x-icon" />
-
+  <html lang="{% if page.lang %}{{ page.lang }}{% else %}{{ site.lang }}{% endif %}">
   <!-- CSS -->
   <link rel="stylesheet" href="/css/reset.css">
   <link rel="stylesheet" href="/css/grid.bootstrap.css">
