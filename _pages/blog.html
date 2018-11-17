@@ -22,7 +22,7 @@ favicon: favicon-file-text.ico
       <div class="col-md-6">
         <span class="fa fa-lg fa-folder-open-o icon-shadow"></span>
         <select id="category_filter" class="input">
-          <option value="all">All Categories</option>
+          <option value="all">Todas as categorias</option>
           {% for category in site.categories %}
           <option value="{{ category | first | upcase }}">{{ category | first | upcase }}</option>
           {% endfor %}
