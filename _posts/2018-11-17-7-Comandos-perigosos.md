@@ -5,7 +5,7 @@ output:
  html_document:
    toc: true
    keep_md: yes
-categories: Terminal Linux
+categories: Terminal
 layout: post
 featured_image: /images/linux/7-comandos-danger.png
 ---

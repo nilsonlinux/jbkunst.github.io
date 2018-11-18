@@ -7,7 +7,7 @@ output:
  github_document:
    always_allow_html: yes
    toc: true
-categories: Instalação Linux
+categories: Instalação
 layout: post
 featured_image: /images/linux/como-instalar-archlinux.jpg
 ---
