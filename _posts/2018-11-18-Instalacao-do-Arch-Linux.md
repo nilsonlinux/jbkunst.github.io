@@ -1,5 +1,5 @@
 ---
-title: "Instalação do Arch linux."
+title: "Instalação do Arch linux"
 author: "Nilsonlinux"
 output:
  html_document:

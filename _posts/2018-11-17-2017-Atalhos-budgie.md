@@ -1,5 +1,5 @@
 ---
-title: "Atalhos budgie (Solus)."
+title: "Atalhos budgie (Solus)"
 author: "Nilsonlinux"
 output:
  html_document:

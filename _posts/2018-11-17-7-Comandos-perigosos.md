@@ -1,5 +1,5 @@
 ---
-title: "7 Comandos perigosos."
+title: "7 Comandos perigosos"
 author: "Nilsonlinux"
 output:
  html_document:
