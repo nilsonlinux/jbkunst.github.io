@@ -1,11 +1,11 @@
 ---
-title: "Giving a Thematic Touch to your Interactive Chart"
-author: "Joshua Kunst"
+title: "Eopkg detahes"
+author: "Nilsonlinux"
 output:
  html_document:
    toc: true
    keep_md: yes
-categories: R
+categories: Linux
 layout: post
 featured_image: /images/featured-image/thematic-chart.gif
 ---
