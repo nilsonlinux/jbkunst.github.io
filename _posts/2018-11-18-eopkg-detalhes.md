@@ -5,7 +5,7 @@ output:
  html_document:
    toc: true
    keep_md: yes
-categories: Linux
+categories: Terminal
 layout: post
 featured_image: /images/linux/solus.png
 ---
