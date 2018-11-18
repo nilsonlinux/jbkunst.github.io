@@ -7,7 +7,7 @@ output:
    keep_md: yes
 categories: Terminal
 layout: post
-featured_image: /images/linux/7-comand-danger.png
+featured_image: /images/linux/7-comandos-danger.png
 ---
 
 
