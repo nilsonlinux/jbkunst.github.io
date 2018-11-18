@@ -1,13 +1,13 @@
 ---
-title: "Thematic Interactive Map"
-author: "Joshua Kunst"
+title: "7 Comandos perigosos."
+author: "Nilsonlinux"
 output:
  html_document:
    toc: true
    keep_md: yes
-categories: R
+categories: Terminal
 layout: post
-featured_image: /images/featured-image/thematic-interactive-map.gif
+featured_image: /images/linux/7-comand-danger.png
 ---
 
 
