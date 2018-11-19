@@ -1,5 +1,5 @@
 ---
-title: "Eopkg detahes"
+title: "Eopkg detalhes"
 author: "Nilsonlinux"
 output:
  html_document:
